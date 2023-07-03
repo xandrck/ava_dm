@@ -1,0 +1,2 @@
+module DataMigrationsHelper
+end

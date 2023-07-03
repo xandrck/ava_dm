@@ -1,0 +1,39 @@
+<div class="upload-button">
+  <%= form_tag import_patients_path, multipart: true do %>
+    <%= file_field_tag :file, required: true, accept: 'text/csv' %>
+    <%= submit_tag 'Import CSV' %>
+  <% end %>
+</div>
+
+<div>
+  <% if @patients.present? %>
+    <h2>Patients:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>health identifier</th>
+          <th>health identifier province</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>middle name</th>
+          <th>phone</th>
+          <th>email</th>
+          <th>address 1</th>
+          <th>address 2</th>
+          <th>address province</th>
+          <th>address city</th>
+          <th>address postal code</th>
+          <th>date of birth</th>
+          <th>sex</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'patients' %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2>No patients</h2>
+  <% end %>
+</div>
+
+

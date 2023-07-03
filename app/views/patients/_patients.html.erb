@@ -1,0 +1,18 @@
+<% @patients.each do |patient| %>
+  <tr>
+    <td><%= patient.health_identifier %></td>
+    <td><%= patient.health_identifier_province %></td>
+    <td><%= patient.first_name %></td>
+    <td><%= patient.last_name %></td>
+    <td><%= patient.middle_name %></td>
+    <td><%= patient.phone_number %></td>
+    <td><%= patient.email %></td>
+    <td><%= patient.address_1 %></td>
+    <td><%= patient.address_2 %></td>
+    <td><%= patient.province %></td>
+    <td><%= patient.city %></td>
+    <td><%= patient.postal_code %></td>
+    <td><%= patient.date_of_birth %></td>
+    <td><%= patient.sex %></td>
+  </tr>
+<% end %>

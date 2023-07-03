@@ -1,0 +1,31 @@
+<div>
+  <% if @data_migrations.present? %>
+    <h2>Data Migrations:</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>imported_patients</th>
+        <th>migration_time</th>
+        <th>updates_patients</th>
+        <th>failed_patients</th>
+        <th>migration_errors</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @data_migrations.each do |migration| %>
+        <tr>
+          <td><%= migration.imported_patients %></td>
+          <td><%= migration.migration_time %></td>
+          <td><%= migration.updates_patients %></td>
+          <td><%= migration.failed_patients %></td>
+          <td><%= migration.migration_errors %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2>No data</h2>
+  <% end %>
+</div>
+
+

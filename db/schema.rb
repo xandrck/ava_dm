@@ -10,32 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_02_224428) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_03_061717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.bigint "patient_id"
-    t.string "city"
-    t.string "street_name"
-    t.string "street_number"
-    t.string "zip_code"
-    t.text "additional_info"
-    t.bigint "country_id"
+  create_table "data_migrations", force: :cascade do |t|
+    t.integer "imported_patients"
+    t.float "migration_time"
+    t.integer "updates_patients"
+    t.integer "failed_patients"
+    t.string "migration_errors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["patient_id"], name: "index_addresses_on_patient_id"
   end
 
   create_table "patients", force: :cascade do |t|
     t.integer "health_identifier"
-    t.string "health_identifier_province"
+    t.integer "health_identifier_province"
     t.string "first_name"
     t.string "last_name"
     t.string "middle_name"
-    t.string "phone_code"
     t.string "phone_number"
     t.string "email"
+    t.string "address_1"
+    t.string "address_2"
+    t.integer "province"
+    t.string "city"
+    t.string "postal_code"
+    t.date "date_of_birth"
+    t.integer "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root 'patients#index'
+  root 'data_migrations#index'
 
-  resources :patients, only: :index
+  resources :patients, only: :index do
+    collection { post :import }
+  end
 end

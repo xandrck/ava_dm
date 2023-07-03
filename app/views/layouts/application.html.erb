@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <div class="errors">
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %>">
+          <%= value %>
+        </div>
+      <% end %>
+
+      <br>
+    </div>
+
     <%= yield %>
   </body>
 </html>
