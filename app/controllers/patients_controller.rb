@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
   end
 
   def import
+    # services could be called in job
     data_migration_service.call
     import_service.call
 
@@ -16,7 +17,11 @@ class PatientsController < ApplicationController
   private
 
   def file
-    params[:file]
+    params[:file] || blob
+  end
+
+  def blob
+    @blob ||= ActiveStorage::Blob.find_by(id: params[:file_blob_id])
   end
 
   def import_service

@@ -20,7 +20,11 @@
           <td><%= migration.migration_time %></td>
           <td><%= migration.updates_patients %></td>
           <td><%= migration.failed_patients %></td>
-          <td><%= link_to 'Migrate', import_patients_path(file: migration.file), data: { turbo_method: :post } %></td>
+          <td>
+            <%= link_to 'Migrate',
+                        import_patients_path(file_blob_id: migration.file.blob_id),
+                        data: { turbo_method: :post } %>
+          </td>
         </tr>
       <% end %>
       </tbody>
@@ -29,5 +33,4 @@
     <h2>No data</h2>
   <% end %>
 </div>
-
 

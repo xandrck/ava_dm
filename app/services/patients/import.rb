@@ -25,7 +25,7 @@ class Patients::Import
     return errors << 'Headers mismatched.' unless headers_match?
     return errors << "Content type is not valid: #{file.content_type}" unless file_content_type_valid?
 
-    CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file_path, headers: true) do |row|
       critical_error = []
       @line_number += 1
 
@@ -54,6 +54,7 @@ class Patients::Import
       end
     end
 
+    # if we will use Address as and additional model we will need to use Transaction and think about improvement of creation records speed
     Patient.insert_all(patients_data) if patients_data.present?
   rescue StandardError => error
     @success = false
@@ -78,4 +79,8 @@ class Patients::Import
 
   attr_reader :file, :patients_data, :data_migration
   attr_writer :errors
+
+  def file_path
+    file.try(:path) || file.service.path_for(file.key)
+  end
 end

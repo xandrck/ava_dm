@@ -17,7 +17,7 @@ module Patients::ImportValidator
   ]
 
   def headers_match?
-    csv_headers = CSV.open(file.path, &:readline)
+    csv_headers = CSV.open(file_path, &:readline)
 
     csv_headers == CSV_HEADERS
   end
