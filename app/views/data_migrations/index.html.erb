@@ -4,21 +4,23 @@
     <table>
       <thead>
       <tr>
-        <th>imported_patients</th>
-        <th>migration_time</th>
-        <th>updates_patients</th>
-        <th>failed_patients</th>
-        <th>migration_errors</th>
+        <th>ID</th>
+        <th>Imported patients</th>
+        <th>Migration time</th>
+        <th>Updates patients</th>
+        <th>Failed patients</th>
+        <th>Run migration</th>
       </tr>
       </thead>
       <tbody>
       <% @data_migrations.each do |migration| %>
         <tr>
+          <td><%= link_to migration.id, data_migration_path(migration.id) %></td>
           <td><%= migration.imported_patients %></td>
           <td><%= migration.migration_time %></td>
           <td><%= migration.updates_patients %></td>
           <td><%= migration.failed_patients %></td>
-          <td><%= migration.migration_errors %></td>
+          <td><%= link_to 'Migrate', import_patients_path(file: migration.file), data: { turbo_method: :post } %></td>
         </tr>
       <% end %>
       </tbody>

@@ -1,17 +1,16 @@
 class PatientsController < ApplicationController
   before_action :file_present?, only: :import
   def index
-    @patients = Patient.all
+    @patients = Patient.order(:health_identifier)
   end
 
   def import
-    # move to the job
-    service.call
+    data_migration_service.call
+    import_service.call
 
-    redirect_to patients_path, notice: service.errors.join(', ') and return unless service.success?
+    redirect_to patients_path, notice: 'Something goes wrong, check migration details.' and return unless import_service.success?
 
-    notice = service.errors ? service.errors.join(', ') : 'Patients imported started.'
-    redirect_to patients_path, notice: notice
+    redirect_to patients_path, notice: 'Patients imported.'
   end
 
   private
@@ -20,8 +19,16 @@ class PatientsController < ApplicationController
     params[:file]
   end
 
-  def service
-    @service ||= Patients::Import.new(file)
+  def import_service
+    @import_service ||= Patients::Import.new(data_migration_id: data_migration.id, file: file)
+  end
+
+  def data_migration_service
+    @data_migration_service ||= DataMigrations::Log.new(file)
+  end
+
+  def data_migration
+    @data_migration ||= data_migration_service.data_migration
   end
 
   # could be as an additional check

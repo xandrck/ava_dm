@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <div>
+      <%= link_to 'Dashboard', root_path %> |
+      <%= link_to 'Data Migrations', data_migrations_path %>
+      <%= link_to 'Patients', patients_path %>
+    </div>
     <div class="errors">
       <% flash.each do |key, value| %>
         <div class="flash <%= key %>">

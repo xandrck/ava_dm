@@ -9,13 +9,13 @@ require_relative 'import_validator'
 class Patients::Import
   include Patients::ImportValidator, Patients::ImportAttributes
 
-  def initialize(file)
+  def initialize(data_migration_id:, file:)
     @file = file
     @patients_data = []
     @errors = []
     @success = true
     @line_number = 0
-    @data_migration = DataMigration.create
+    @data_migration = DataMigration.find_or_create_by(id: data_migration_id)
   end
 
   attr_reader :errors
@@ -65,7 +65,7 @@ class Patients::Import
     data_migration.update(
       imported_patients: patients_data.size,
       failed_patients: errors.count,
-      migration_errors: errors.join(', '),
+      migration_errors: errors.to_json,
       migration_time: migration_time
     )
   end

@@ -1,0 +1,8 @@
+<div>ID: <%= @data_migration.id %> </div>
+<div>Imported patients:  <%= @data_migration.imported_patients %></div>
+<div>Migration time: <%= @data_migration.migration_time %></div>
+<div>Updates patients: <%= @data_migration.updates_patients %></div>
+<div>Failed patients: <%= @data_migration.failed_patients %></div>
+<div>Migration errors: <% format_migration_errors(@data_migration.migration_errors) %></div>
+<div>File: <%= @data_migration.file.present? ? link_to('Download File', url_for(@data_migration.file)) : 'No file' %></div>
+
